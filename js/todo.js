@@ -39,7 +39,6 @@ const render = () => {
         todos.forEach(item => {
             if (!!item.title) {
                 const li = document.createElement('li');
-
                 li.classList.add('py-2')
                 li.innerText = item.title;
                 ul.appendChild(li)
