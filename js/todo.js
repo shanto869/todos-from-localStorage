@@ -7,8 +7,11 @@ const getElement = (id) => {
 
 // add onclick for the + btn
 const handleSubmit = () => {
+    const inputField = document.getElementById('todo-text');
+
     // get input field value
     const inputValue = getElement('todo-text').value;
+    inputField.value = '';
 
     // get todos value from the local storage
     const todosString = localStorage.getItem('todos');
@@ -23,6 +26,7 @@ const handleSubmit = () => {
         localStorage.setItem('todos', JSON.stringify(todosList))
     }
     render()
+
 }
 
 // display todos from the local storage
@@ -30,13 +34,19 @@ const render = () => {
     const todos = JSON.parse(localStorage.getItem('todos'));
     const ul = getElement('todo-list');
     ul.textContent = ''
+    if (todos) {
 
-    todos.forEach(item => {
-        const li = document.createElement('li');
-        li.classList.add('py-2')
-        li.innerText = item.title;
-        ul.appendChild(li)
-    })
+        todos.forEach(item => {
+            if (!!item.title) {
+                const li = document.createElement('li');
+
+                li.classList.add('py-2')
+                li.innerText = item.title;
+                ul.appendChild(li)
+            }
+
+        })
+    }
 }
 
 render();
